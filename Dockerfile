@@ -1,14 +1,15 @@
-FROM maven:3.9.2-eclipse-temurin-17 AS build
-WORKDIR /workspace
-COPY pom.xml mvnw* ./
-COPY .mvn .mvn
-# copy source
+# Use Node to build the Angular app
+FROM node:18 AS build
+WORKDIR /usr/src/app
+COPY package*.json ./
+COPY angular.json ./
+COPY tsconfig*.json ./
 COPY src ./src
-RUN mvn -B -DskipTests package
+RUN npm install
+RUN npm run build -- --outputPath=dist
 
-FROM eclipse-temurin:17-jdk-jammy
-WORKDIR /app
-COPY --from=build /workspace/target/elearning-0.0.1-SNAPSHOT.jar app.jar
-EXPOSE 8080
-VOLUME /app/uploads
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+# Use nginx to serve built files
+FROM nginx:stable-alpine
+COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

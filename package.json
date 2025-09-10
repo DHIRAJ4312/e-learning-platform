@@ -1,0 +1,28 @@
+{
+  "name": "elearning-frontend",
+  "version": "0.0.1",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --host 0.0.0.0",
+    "build": "ng build --prod",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "15.2.0",
+    "@angular/common": "15.2.0",
+    "@angular/compiler": "15.2.0",
+    "@angular/core": "15.2.0",
+    "@angular/forms": "15.2.0",
+    "@angular/platform-browser": "15.2.0",
+    "@angular/platform-browser-dynamic": "15.2.0",
+    "@angular/router": "15.2.0"
+  },
+  "devDependencies": {
+    "@angular/cli": "15.2.0",
+    "@angular/compiler-cli": "15.2.0",
+    "typescript": "5.1.6"
+  }
+}
